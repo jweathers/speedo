@@ -16,9 +16,13 @@ elStatus = document.getElementById('status');
 function updateSpeed(pos) {
     var speed = pos.coords.speed;
     if(speed!==null) {
-        elSpeed.innerText=speed;
+        elSpeed.innerText=convertToMph(speed);
     }
     elStatus.innerText='';
+}
+
+function convertToMph(metersPerSecond) {
+    return (metersPerSecond * 2.236936).toFixed(1);
 }
 
 function error(err){
