@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Speedo</title>
+</head>
+<body>
+<div>Speed</div>
+<div id="geo_speed" style="font-size: 1.75in;">0.0</div> <sup>mph</sup>
+<div id="status"></div>
+</body>
+<script>
+var elSpeed, elStatus;
+elSpeed = document.getElementById('geo_speed');
+elStatus = document.getElementById('status');
+function updateSpeed(pos) {
+    var speed = pos.coords.speed;
+    if(speed!==null) {
+        elSpeed.innerText=speed;
+    }
+    elStatus.innerText='';
+}
+
+function error(err){
+    elStatus.innerHTML=err.message;
+}
+
+var options = {
+    enableHighAccuracy: true,
+    timeout: 3000,
+    maximumAge: 0
+};
+
+navigator.geolocation.watchPosition(updateSpeed, error, options);
+</script>
+</html>
